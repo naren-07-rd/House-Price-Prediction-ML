@@ -254,7 +254,7 @@ This project helped me learn:
 
 **Narenthiranath AS**
 
-Computer Science Engineering Student
+Computer Science Student
 
 Interested in:
 
