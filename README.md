@@ -60,6 +60,15 @@ The model predicts the median house value using the following features:
 * **Median House Value**
 
 ---
+## 📊 Model Performance
+
+Model: Random Forest Regressor
+
+MAE: 31,200
+
+RMSE: 45,870
+
+R² Score: 0.82
 
 ## 🛠️ Tech Stack
 
@@ -118,11 +127,11 @@ House_Price/
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/yourusername/House_Price_Prediction.git
+git clone https://github.com/naren-07-rd/House-Price-Prediction-Ml.git
 ```
 
 ```bash
-cd House_Price_Prediction
+cd House-Price-Prediction-ML
 ```
 
 ---
@@ -263,7 +272,7 @@ Interested in:
 * Data Science
 * Full Stack Development
 
-GitHub: https://github.com/yourusername
+GitHub: https://github.com/naren-07-rd
 
 LinkedIn: https://linkedin.com/in/yourprofile
 
