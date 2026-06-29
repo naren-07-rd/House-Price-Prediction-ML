@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>California House Price Predictor</title>
+  <link rel="stylesheet" href="style.css" />
+  <!-- Google Fonts: Inter for body, Syne for display -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- Ambient background orbs for depth -->
+  <div class="bg-orb orb-1" aria-hidden="true"></div>
+  <div class="bg-orb orb-2" aria-hidden="true"></div>
+  <div class="bg-orb orb-3" aria-hidden="true"></div>
+
+  <main class="page-wrapper">
+
+    <!-- ── Header ── -->
+    <header class="app-header">
+      <div class="header-icon" aria-hidden="true">
+        <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M14 2L3 11V26H11V18H17V26H25V11L14 2Z" stroke="white" stroke-width="2" stroke-linejoin="round" fill="rgba(255,255,255,0.15)"/>
+        </svg>
+      </div>
+      <div class="header-text">
+        <h1 class="app-title">California House Price Predictor</h1>
+        <p class="app-subtitle">ML-powered valuation · California Housing Dataset</p>
+      </div>
+    </header>
+
+    <!-- ── Prediction Form Card ── -->
+    <section class="glass-card form-card" aria-label="Input features">
+      <h2 class="section-label">Enter Property Features</h2>
+
+      <form id="predictForm" novalidate>
+
+        <!-- Row 1: Coordinates -->
+        <div class="form-row two-col">
+          <div class="field-group">
+            <label for="longitude">Longitude</label>
+            <input
+              type="number" id="longitude" name="longitude"
+              placeholder="-118.24" step="any"
+              aria-describedby="longitude-error"
+              autocomplete="off"
+            />
+            <span class="field-error" id="longitude-error" role="alert"></span>
+          </div>
+          <div class="field-group">
+            <label for="latitude">Latitude</label>
+            <input
+              type="number" id="latitude" name="latitude"
+              placeholder="34.05" step="any"
+              aria-describedby="latitude-error"
+              autocomplete="off"
+            />
+            <span class="field-error" id="latitude-error" role="alert"></span>
+          </div>
+        </div>
+
+        <!-- Row 2: Age + Income -->
+        <div class="form-row two-col">
+          <div class="field-group">
+            <label for="housing_median_age">Housing Median Age <span class="unit">(years)</span></label>
+            <input
+              type="number" id="housing_median_age" name="housing_median_age"
+              placeholder="29" min="1" step="any"
+              aria-describedby="housing_median_age-error"
+              autocomplete="off"
+            />
+            <span class="field-error" id="housing_median_age-error" role="alert"></span>
+          </div>
+          <div class="field-group">
+            <label for="median_income">Median Income <span class="unit">(×$10k)</span></label>
+            <input
+              type="number" id="median_income" name="median_income"
+              placeholder="3.87" min="0" step="any"
+              aria-describedby="median_income-error"
+              autocomplete="off"
+            />
+            <span class="field-error" id="median_income-error" role="alert"></span>
+          </div>
+        </div>
+
+        <!-- Row 3: Rooms + Bedrooms -->
+        <div class="form-row two-col">
+          <div class="field-group">
+            <label for="total_rooms">Total Rooms</label>
+            <input
+              type="number" id="total_rooms" name="total_rooms"
+              placeholder="2635" min="1" step="1"
+              aria-describedby="total_rooms-error"
+              autocomplete="off"
+            />
+            <span class="field-error" id="total_rooms-error" role="alert"></span>
+          </div>
+          <div class="field-group">
+            <label for="total_bedrooms">Total Bedrooms</label>
+            <input
+              type="number" id="total_bedrooms" name="total_bedrooms"
+              placeholder="537" min="1" step="1"
+              aria-describedby="total_bedrooms-error"
+              autocomplete="off"
+            />
+            <span class="field-error" id="total_bedrooms-error" role="alert"></span>
+          </div>
+        </div>
+
+        <!-- Row 4: Population + Households -->
+        <div class="form-row two-col">
+          <div class="field-group">
+            <label for="population">Population</label>
+            <input
+              type="number" id="population" name="population"
+              placeholder="1425" min="1" step="1"
+              aria-describedby="population-error"
+              autocomplete="off"
+            />
+            <span class="field-error" id="population-error" role="alert"></span>
+          </div>
+          <div class="field-group">
+            <label for="households">Households</label>
+            <input
+              type="number" id="households" name="households"
+              placeholder="499" min="1" step="1"
+              aria-describedby="households-error"
+              autocomplete="off"
+            />
+            <span class="field-error" id="households-error" role="alert"></span>
+          </div>
+        </div>
+
+        <!-- Submit -->
+        <div class="form-row submit-row">
+          <button type="submit" id="predictBtn" class="btn-predict">
+            <span class="btn-label">Predict Price</span>
+            <span class="btn-spinner" aria-hidden="true"></span>
+            <svg class="btn-icon" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M4 10H16M16 10L11 5M16 10L11 15" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+        </div>
+
+      </form>
+    </section>
+
+    <!-- ── Result Card (hidden until prediction) ── -->
+    <section class="glass-card result-card" id="resultCard" aria-live="polite" aria-atomic="true" hidden>
+      <div class="result-inner">
+        <p class="result-eyebrow">Estimated House Value</p>
+        <p class="result-price" id="resultPrice">—</p>
+        <p class="result-note">Based on the California Housing Dataset model.</p>
+      </div>
+      <div class="result-decoration" aria-hidden="true">
+        <svg width="72" height="72" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="36" cy="36" r="35" stroke="rgba(255,255,255,0.18)" stroke-width="2"/>
+          <path d="M36 10L16 28V60H28V44H44V60H56V28L36 10Z" fill="rgba(255,255,255,0.1)" stroke="rgba(255,255,255,0.4)" stroke-width="1.5" stroke-linejoin="round"/>
+        </svg>
+      </div>
+    </section>
+
+    <!-- ── API Error Banner ── -->
+    <div class="error-banner" id="errorBanner" role="alert" hidden>
+      <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+        <circle cx="9" cy="9" r="8" stroke="#ff6b6b" stroke-width="1.5"/>
+        <path d="M9 5V10" stroke="#ff6b6b" stroke-width="1.5" stroke-linecap="round"/>
+        <circle cx="9" cy="13" r="0.75" fill="#ff6b6b"/>
+      </svg>
+      <span id="errorMessage">Something went wrong.</span>
+    </div>
+
+    <footer class="app-footer">
+      FastAPI backend · <code>POST /predict</code>
+    </footer>
+
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

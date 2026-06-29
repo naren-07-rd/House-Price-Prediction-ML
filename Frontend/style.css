@@ -1,0 +1,508 @@
+/* ============================================================
+   California House Price Predictor — style.css
+   Design: Glassmorphism · Purple gradient · Inter + Syne
+   ============================================================ */
+
+/* ── Reset & Base ── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  /* Color palette */
+  --grad-start:    #0d0520;
+  --grad-mid:      #1a0845;
+  --grad-end:      #2d0a6e;
+
+  --orb-violet:    #7b2ff7;
+  --orb-indigo:    #4f46e5;
+  --orb-rose:      #c026d3;
+
+  --glass-bg:      rgba(255, 255, 255, 0.07);
+  --glass-border:  rgba(255, 255, 255, 0.14);
+  --glass-shadow:  rgba(0, 0, 0, 0.45);
+
+  --input-bg:      rgba(255, 255, 255, 0.06);
+  --input-border:  rgba(255, 255, 255, 0.18);
+  --input-focus:   rgba(167, 139, 250, 0.55);
+
+  --text-primary:  #f5f3ff;
+  --text-secondary: rgba(245, 243, 255, 0.65);
+  --text-muted:    rgba(245, 243, 255, 0.4);
+
+  --accent:        #a78bfa;
+  --accent-bright: #c4b5fd;
+  --error-color:   #f87171;
+  --success-from:  #7b2ff7;
+  --success-to:    #4f46e5;
+
+  /* Typography */
+  --font-display: 'Syne', sans-serif;
+  --font-body:    'Inter', sans-serif;
+
+  /* Radii */
+  --radius-card: 24px;
+  --radius-input: 12px;
+  --radius-btn:  14px;
+
+  /* Transitions */
+  --ease: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  font-family: var(--font-body);
+  background: linear-gradient(135deg, var(--grad-start) 0%, var(--grad-mid) 50%, var(--grad-end) 100%);
+  min-height: 100vh;
+  color: var(--text-primary);
+  overflow-x: hidden;
+}
+
+/* ── Ambient Background Orbs ── */
+.bg-orb {
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(90px);
+  opacity: 0.28;
+  pointer-events: none;
+  z-index: 0;
+  animation: floatOrb 14s ease-in-out infinite alternate;
+}
+
+.orb-1 {
+  width: 520px; height: 520px;
+  background: var(--orb-violet);
+  top: -140px; left: -160px;
+  animation-delay: 0s;
+}
+.orb-2 {
+  width: 420px; height: 420px;
+  background: var(--orb-rose);
+  bottom: -100px; right: -120px;
+  animation-delay: -5s;
+}
+.orb-3 {
+  width: 300px; height: 300px;
+  background: var(--orb-indigo);
+  top: 50%; left: 60%;
+  transform: translate(-50%, -50%);
+  animation-delay: -9s;
+  opacity: 0.18;
+}
+
+@keyframes floatOrb {
+  0%   { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(30px, 40px) scale(1.06); }
+}
+
+/* ── Page Wrapper ── */
+.page-wrapper {
+  position: relative;
+  z-index: 1;
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 48px 20px 60px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* ── Header ── */
+.app-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 4px;
+}
+
+.header-icon {
+  flex-shrink: 0;
+  width: 52px; height: 52px;
+  background: rgba(167, 139, 250, 0.18);
+  border: 1px solid rgba(167, 139, 250, 0.35);
+  border-radius: 14px;
+  display: flex; align-items: center; justify-content: center;
+  backdrop-filter: blur(8px);
+}
+
+.app-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.3rem, 4vw, 1.75rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  color: var(--text-primary);
+}
+
+.app-subtitle {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-top: 4px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+/* ── Glass Card ── */
+.glass-card {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-card);
+  backdrop-filter: blur(24px) saturate(160%);
+  -webkit-backdrop-filter: blur(24px) saturate(160%);
+  box-shadow:
+    0 8px 32px var(--glass-shadow),
+    inset 0 1px 0 rgba(255,255,255,0.1);
+  padding: 36px 32px;
+  animation: cardIn 0.5s var(--ease) both;
+}
+
+@keyframes cardIn {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Section label ── */
+.section-label {
+  font-family: var(--font-display);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 28px;
+}
+
+/* ── Form Layout ── */
+.form-row {
+  margin-bottom: 20px;
+}
+
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.submit-row {
+  margin-top: 8px;
+  margin-bottom: 0;
+}
+
+/* ── Field Group ── */
+.field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.field-group label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  letter-spacing: 0.01em;
+}
+
+.field-group .unit {
+  font-weight: 400;
+  color: var(--text-muted);
+  font-size: 0.75rem;
+}
+
+/* ── Inputs ── */
+.field-group input {
+  width: 100%;
+  background: var(--input-bg);
+  border: 1px solid var(--input-border);
+  border-radius: var(--radius-input);
+  padding: 12px 16px;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  outline: none;
+  transition:
+    border-color 0.2s var(--ease),
+    box-shadow 0.2s var(--ease),
+    background 0.2s var(--ease);
+  -moz-appearance: textfield;
+}
+
+/* Chrome/Edge/Safari number spinner hide */
+.field-group input::-webkit-outer-spin-button,
+.field-group input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.field-group input::placeholder {
+  color: var(--text-muted);
+  font-weight: 400;
+}
+
+.field-group input:hover {
+  border-color: rgba(167, 139, 250, 0.4);
+  background: rgba(255,255,255,0.09);
+}
+
+.field-group input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--input-focus);
+  background: rgba(255,255,255,0.1);
+}
+
+/* Invalid state */
+.field-group input.is-invalid {
+  border-color: var(--error-color);
+  box-shadow: 0 0 0 3px rgba(248, 113, 113, 0.22);
+}
+
+/* Valid state after interaction */
+.field-group input.is-valid {
+  border-color: rgba(134, 239, 172, 0.55);
+}
+
+/* ── Field Errors ── */
+.field-error {
+  font-size: 0.73rem;
+  color: var(--error-color);
+  min-height: 16px;
+  display: block;
+  font-weight: 500;
+  transition: opacity 0.2s var(--ease);
+}
+
+/* ── Predict Button ── */
+.btn-predict {
+  width: 100%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 15px 28px;
+  border: none;
+  border-radius: var(--radius-btn);
+  cursor: pointer;
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: #fff;
+  background: linear-gradient(130deg, #7b2ff7 0%, #4f46e5 60%, #c026d3 100%);
+  background-size: 200% 200%;
+  box-shadow:
+    0 4px 20px rgba(123, 47, 247, 0.45),
+    0 1px 0 rgba(255,255,255,0.15) inset;
+  transition:
+    transform 0.18s var(--ease),
+    box-shadow 0.18s var(--ease),
+    background-position 0.4s var(--ease);
+  overflow: hidden;
+}
+
+.btn-predict::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(255,255,255,0.12), transparent);
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+.btn-predict:hover:not(:disabled) {
+  transform: translateY(-2px);
+  background-position: 100% 50%;
+  box-shadow:
+    0 8px 28px rgba(123, 47, 247, 0.55),
+    0 1px 0 rgba(255,255,255,0.2) inset;
+}
+
+.btn-predict:active:not(:disabled) {
+  transform: translateY(0px);
+  box-shadow: 0 2px 10px rgba(123, 47, 247, 0.4);
+}
+
+.btn-predict:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+/* Loading state: hide label + icon, show spinner */
+.btn-predict .btn-spinner {
+  display: none;
+  width: 18px; height: 18px;
+  border: 2px solid rgba(255,255,255,0.3);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+
+.btn-predict.is-loading .btn-label,
+.btn-predict.is-loading .btn-icon {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.btn-predict.is-loading .btn-spinner {
+  display: block;
+  position: absolute;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ── Result Card ── */
+.result-card {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(
+    135deg,
+    rgba(123, 47, 247, 0.2) 0%,
+    rgba(79, 70, 229, 0.15) 100%
+  );
+  border-color: rgba(167, 139, 250, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 32px 36px;
+  animation: resultReveal 0.55s var(--ease) both;
+}
+
+@keyframes resultReveal {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.result-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.result-eyebrow {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent-bright);
+}
+
+.result-price {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 6vw, 2.8rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: #fff;
+  line-height: 1;
+  /* Subtle shimmer on first reveal */
+  animation: priceShimmer 1.2s var(--ease) forwards;
+}
+
+@keyframes priceShimmer {
+  0%   { opacity: 0; transform: translateX(-12px); }
+  100% { opacity: 1; transform: translateX(0); }
+}
+
+.result-note {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
+.result-decoration {
+  opacity: 0.55;
+  flex-shrink: 0;
+}
+
+/* ── Error Banner ── */
+.error-banner {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 18px;
+  background: rgba(248, 113, 113, 0.1);
+  border: 1px solid rgba(248, 113, 113, 0.3);
+  border-radius: 12px;
+  backdrop-filter: blur(12px);
+  font-size: 0.85rem;
+  color: #fca5a5;
+  animation: cardIn 0.3s var(--ease) both;
+}
+
+/* ── Footer ── */
+.app-footer {
+  text-align: center;
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  padding-top: 4px;
+  letter-spacing: 0.02em;
+}
+
+.app-footer code {
+  font-family: 'SF Mono', 'Fira Mono', monospace;
+  color: var(--accent);
+  background: rgba(167, 139, 250, 0.12);
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+/* ── Utility: hidden ── */
+[hidden] {
+  display: none !important;
+}
+
+/* ── Reduced Motion ── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+  .bg-orb { animation: none; }
+}
+
+/* ── Responsive ── */
+@media (max-width: 520px) {
+  .page-wrapper {
+    padding: 28px 14px 48px;
+    gap: 18px;
+  }
+
+  .glass-card {
+    padding: 24px 18px;
+  }
+
+  .two-col {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  /* Add spacing between stacked field groups in mobile */
+  .two-col .field-group + .field-group {
+    margin-top: 16px;
+  }
+
+  .app-title {
+    font-size: 1.15rem;
+  }
+
+  .result-card {
+    padding: 24px 20px;
+  }
+
+  .result-decoration {
+    display: none;
+  }
+}
