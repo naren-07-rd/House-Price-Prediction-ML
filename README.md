@@ -274,7 +274,7 @@ Interested in:
 
 GitHub: https://github.com/naren-07-rd
 
-LinkedIn: https://linkedin.com/in/yourprofile
+LinkedIn: https://www.linkedin.com/in/narenthiranath-as-6a5356323?utm_source=share_via&utm_content=profile&utm_medium=member_android
 
 ---
 
