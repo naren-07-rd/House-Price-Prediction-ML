@@ -171,13 +171,13 @@ Open another terminal:
 
 ```bash
 cd Frontend
-py -m http.server 8080
+python -m http.server 5500
 ```
 
 Frontend URL:
 
 ```text
-http://127.0.0.1:8080/index.html
+http://localhost:5500/index.html
 ```
 
 ---
