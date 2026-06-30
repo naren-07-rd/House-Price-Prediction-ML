@@ -9,7 +9,7 @@
 /* ─────────────────────────────────────────────
    Configuration
 ───────────────────────────────────────────── */
-const API_URL = 'http://127.0.0.1:8000/predict';
+const API_URL = 'https://house-price-prediction-ml-2-zunq.onrender.com/predict';
 const REQUEST_TIMEOUT_MS = 15000; // 15 s before we abort
 
 /* ─────────────────────────────────────────────
